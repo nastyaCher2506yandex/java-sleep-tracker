@@ -82,11 +82,11 @@ public class AnalisusFunction {
 
         //добавляем один день, если человек уснул до 12 дня и если больше 1 сессии, так как это тогда считается за одну ночь,
         //так как согласно условиям эта ночь считается предыдущей ночью
-        if(startSessions.getDateSleep().toLocalTime().isBefore(LocalTime.NOON) && sessions.size() > 1) amountNight = amountNight.plusDays(1);
+        if (startSessions.getDateSleep().toLocalTime().isBefore(LocalTime.NOON) && sessions.size() > 1) amountNight = amountNight.plusDays(1);
 
         //если в последнюю сессию, согласно условию, человек уснул до 12 дня, то это считается в предыдущую ночь
         //поэтому отнимаем один день
-        if(lastSessions.getDateSleep().toLocalTime().isBefore(LocalTime.NOON) && sessions.size() > 1) amountNight = amountNight.minusDays(1);
+        if (lastSessions.getDateSleep().toLocalTime().isBefore(LocalTime.NOON) && sessions.size() > 1) amountNight = amountNight.minusDays(1);
 
 
         //получаем все сесси сна, которые относятся к определенному дню
@@ -114,7 +114,7 @@ public class AnalisusFunction {
     };
 
     //функция по поиску ночей, которые подходят для жаворонка (засыпание до 22:00 и пробуждение до 07:00)
-    Function <List<SleepingSession>,List<SleepingSession>> findEarlySleepers = sessions -> {
+    Function<List<SleepingSession>,List<SleepingSession>> findEarlySleepers = sessions -> {
         return sessions.stream()
                 //если ночь бессоная её проверять и добавлять не нужно
                 //также это убирает дневные сессии
@@ -124,7 +124,7 @@ public class AnalisusFunction {
                     LocalDateTime startSleep = session.getDateSleep();
                     LocalDateTime endSleep = session.getDateWake();
 
-                    if(startSleep.toLocalDate().isEqual(endSleep.toLocalDate())) return false;
+                    if (startSleep.toLocalDate().isEqual(endSleep.toLocalDate())) return false;
 
                     //если входит в диапазон, значит ночь подходит жаворонкам
                     return startSleep.toLocalTime().isBefore(LocalTime.of(22,0)) && endSleep.toLocalTime().isBefore(LocalTime.of(7,0));
@@ -174,11 +174,9 @@ public class AnalisusFunction {
         if (allIntermediateSessions.size() > lastSleepSession.size()
                 && allIntermediateSessions.size() > earlySleepSession.size()) {
             return new SleepAnalysisResult<String>("Человек относится к хронотипу",Optional.of("голубь"));
-        }
-        else if (earlySleepSession.size() < lastSleepSession.size()) {
+        } else if (earlySleepSession.size() < lastSleepSession.size()) {
             return new SleepAnalysisResult<String>("Человек относится к хронотипу",Optional.of("сова"));
-        }
-        else if (earlySleepSession.size() > lastSleepSession.size()) {
+        } else if (earlySleepSession.size() > lastSleepSession.size()) {
             return new SleepAnalysisResult<String>("Человек относится к хронотипу",Optional.of("жаворонок"));
         } else {
             return new SleepAnalysisResult<String>("Человек относится к хронотипу",Optional.of("голубь"));
