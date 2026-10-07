@@ -46,7 +46,7 @@ public class SleepTrackerApp {
                         return result.apply(sleepTracker);
                     })
                     .peek(result -> {
-                        if(result.getResult().isPresent()) System.out.println(result.getDescription()
+                        if (result.getResult().isPresent()) System.out.println(result.getDescription()
                                 + " - " + result.getResult().get());
                     }).toList();
 
