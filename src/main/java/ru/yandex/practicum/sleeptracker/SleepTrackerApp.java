@@ -56,7 +56,7 @@ public class SleepTrackerApp {
     }
 
     //создание и добавление всех функций
-    static public void createAndAddFunction() {
+    public static void createAndAddFunction() {
         AnalisusFunction analisusFunction = new AnalisusFunction();
 
         analyticFunction.add(analisusFunction.countSleepSession);
