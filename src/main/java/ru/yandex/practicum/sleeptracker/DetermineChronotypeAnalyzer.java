@@ -83,5 +83,5 @@ public class DetermineChronotypeAnalyzer implements SleepAnalyzer {
         } else {
             return new SleepAnalysisResult<String>("Человек относится к хронотипу",Optional.of("голубь"));
         }
-    };
+    }
 }
