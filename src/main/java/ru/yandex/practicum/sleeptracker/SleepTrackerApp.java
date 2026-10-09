@@ -13,11 +13,12 @@ public class SleepTrackerApp {
 
     static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
-    static List<Function<List<SleepingSession>,SleepAnalysisResult>> analyticFunction = new ArrayList<>();
+    static List<SleepAnalyzer> analyticFunction = new ArrayList<>();
 
     public static void main(String[] args) {
         if (args.length == 0) {
             System.out.println("Вы не передали в аргументы консоли путь к логу умных часов");
+            return;
         }
 
         //получение названия файла лога трекера сна умных часов
@@ -41,10 +42,12 @@ public class SleepTrackerApp {
             //пробегаемся по всему списку и получаем результаты анализа
             System.out.println("Результаты после анализа сессии сна: ");
             System.out.println();
-            List<SleepAnalysisResult> sleepAnalysisResult = analyticFunction.stream()
+
+            List<SleepAnalysisResult> sleepAnalysisResults = analyticFunction.stream()
                     .map(result -> {
                         return result.apply(sleepTracker);
                     })
+                    .filter(result -> result != null && result.getResult().isPresent())
                     .peek(result -> {
                         if (result.getResult().isPresent()) System.out.println(result.getDescription()
                                 + " - " + result.getResult().get());
@@ -57,14 +60,12 @@ public class SleepTrackerApp {
 
     //создание и добавление всех функций
     public static void createAndAddFunction() {
-        AnalisusFunction analisusFunction = new AnalisusFunction();
-
-        analyticFunction.add(analisusFunction.countSleepSession);
-        analyticFunction.add(analisusFunction.minDuractionSleep);
-        analyticFunction.add(analisusFunction.maxDuractionSleep);
-        analyticFunction.add(analisusFunction.averageDuractionSleep);
-        analyticFunction.add(analisusFunction.countBadSleepSession);
-        analyticFunction.add(analisusFunction.countNightNotSleep);
-        analyticFunction.add(analisusFunction.determineChronotype);
+        analyticFunction.add(new CountSessionsAnalyzer());
+        analyticFunction.add(new MinDurationSessionsAnalyzer());
+        analyticFunction.add(new MaxDurationSessionsAnalyzer());
+        analyticFunction.add(new AverageDurationSessionsAnalyzer());
+        analyticFunction.add(new CountBadStatusSessionsAnalyzer());
+        analyticFunction.add(new CountNotSleepingSessionAnalyzer());
+        analyticFunction.add(new DetermineChronotypeAnalyzer());
     }
 }

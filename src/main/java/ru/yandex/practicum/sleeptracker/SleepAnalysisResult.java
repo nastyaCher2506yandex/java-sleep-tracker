@@ -25,7 +25,8 @@ public class SleepAnalysisResult<T>  {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         SleepAnalysisResult that = (SleepAnalysisResult) o;
-        return result == that.result && Objects.equals(description, that.description);
+        return Objects.equals(result, that.result)
+                && Objects.equals(description, that.description);
     }
 
     @Override
