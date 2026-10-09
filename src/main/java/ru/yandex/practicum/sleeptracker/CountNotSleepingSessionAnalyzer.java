@@ -3,7 +3,6 @@ package ru.yandex.practicum.sleeptracker;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -41,7 +40,7 @@ public class CountNotSleepingSessionAnalyzer implements SleepAnalyzer {
     //функция по подсчету бессоных ночей
     @Override
     public SleepAnalysisResult apply(List<SleepingSession> sleepingSessions) {
-        if(sleepingSessions.isEmpty()) return null;
+        if (sleepingSessions.isEmpty()) return null;
 
         //получаем первую и последнюю сессию временную метку
         SleepingSession startSessions = sleepingSessions.get(0);
