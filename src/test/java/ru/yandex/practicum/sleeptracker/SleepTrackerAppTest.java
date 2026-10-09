@@ -12,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SleepTrackerAppTest {
 
-    static public ArrayList<SleepingSession> sleepingSessions;
-    static public CountSessionsAnalyzer countSessionsAnalyzer;
-    static public  MinDurationSessionsAnalyzer minDurationSessionsAnalyzer;
-    static public  MaxDurationSessionsAnalyzer maxDurationSessionsAnalyzer;
-    static public  AverageDurationSessionsAnalyzer averageDurationSessionsAnalyzer;
-    static public  CountBadStatusSessionsAnalyzer countBadStatusSessionsAnalyzer;
-    static public  CountNotSleepingSessionAnalyzer countNotSleepingSessionAnalyzer;
-    static public  DetermineChronotypeAnalyzer determineChronotypeAnalyzer;
+    public static ArrayList<SleepingSession> sleepingSessions;
+    public static CountSessionsAnalyzer countSessionsAnalyzer;
+    public static MinDurationSessionsAnalyzer minDurationSessionsAnalyzer;
+    public static MaxDurationSessionsAnalyzer maxDurationSessionsAnalyzer;
+    public static AverageDurationSessionsAnalyzer averageDurationSessionsAnalyzer;
+    public static CountBadStatusSessionsAnalyzer countBadStatusSessionsAnalyzer;
+    public static CountNotSleepingSessionAnalyzer countNotSleepingSessionAnalyzer;
+    public static DetermineChronotypeAnalyzer determineChronotypeAnalyzer;
 
     static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
 
